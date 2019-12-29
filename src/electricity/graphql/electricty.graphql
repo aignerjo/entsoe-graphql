@@ -1,0 +1,6 @@
+type Electricity {
+    amount: Int
+    timestamp: Date
+    country: String
+    mix: ElectricityMix
+}
