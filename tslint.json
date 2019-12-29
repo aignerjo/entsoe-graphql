@@ -7,12 +7,22 @@
   "rules": {
     "quotemark": [true, "single"],
     "member-access": [false],
-    "ordered-imports": [false],
+    "ordered-imports": [true, {
+      "grouped-imports": true,
+      "module-source-path": "basename",
+      "import-sources-order": "lowercase-first"
+    }],
     "max-line-length": [true, 150],
     "member-ordering": [false],
     "interface-name": [false],
     "arrow-parens": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "trailing-comma": false,
+    "no-string-literal": false,
+    "object-curly-spacing": [true, "always"],
+    "indent": [true, "spaces", 2]
   },
-  "rulesDirectory": []
+  "rulesDirectory": [
+    "node_modules/tslint-eslint-rules/dist/rules"
+  ]
 }

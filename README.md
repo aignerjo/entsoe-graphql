@@ -34,9 +34,9 @@ To run the app you have to provide specific environment variables
 | ---------------------	|-------------------------------------------	|
 | ENTSOE_API_URL        	| URL to the Entsoe Transparency API          	|
 | ENTSOE_SECURITY_TOKEN 	| Security token for the Entsoe API           	|
-| PLAYGROUND            	| GraphQL playground enabled `(true | false)` 	|
-| DEBUG                 	| GraphQL debug enabled `(true | false)`      	|
-| LOG_LEVEL             	| `debug | info | warn | error`               	|
+| PLAYGROUND            	| GraphQL playground enabled `(true, false)` 	|
+| DEBUG                 	| GraphQL debug enabled `(true, false)`      	|
+| LOG_LEVEL             	| `debug, info, warn, error`               	|
 
 #### Acess to Entsoe API
 To use the adapter you have to provide a [<b>security token</b>](https://transparency.entsoe.eu/content/static_content/Static%20content/web%20api/Guide.html#_authentication_and_authorisation).
