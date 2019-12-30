@@ -4,9 +4,9 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { NetworkingModule } from '../networking/networking.module';
 
 import { DateScalar } from './scalar/date.scalar';
+import { DayToRangePipe } from './pipes/day-to-range.pipe';
 import { ElectricityMixResolver } from './resolvers/electricity/electricity-mix.resolver';
 import { ElectricityResolver } from './resolvers/electricity/electricity.resolver';
-import { ParseDayPipe } from './pipes/parse-day.pipe';
 
 @Module({
     imports: [
@@ -22,7 +22,7 @@ import { ParseDayPipe } from './pipes/parse-day.pipe';
         ElectricityResolver,
         ElectricityMixResolver,
         DateScalar,
-        ParseDayPipe,
+        DayToRangePipe,
     ],
 })
 
