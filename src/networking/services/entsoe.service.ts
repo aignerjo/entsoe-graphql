@@ -64,9 +64,6 @@ export class EntsoeService {
     private initHttpInterceptor() {
         this.httpClient.axiosRef.interceptors.request.use((request) => {
             this.logger.logHttpRequest(request, 'outgoing');
-            if (request.method === 'get') {
-                delete request.headers['content-length'];
-            }
             return request;
         });
 
