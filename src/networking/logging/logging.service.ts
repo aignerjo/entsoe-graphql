@@ -19,7 +19,6 @@ export class LoggingService {
         this.logger.info({
             message: `${direction} request: ${request.method} ${request.url}`,
             headers: LoggingService.sanitizeHeader(request.headers),
-            body: request.data,
             method: request.method,
             params: request.params,
             url: request.url,
