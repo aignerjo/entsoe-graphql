@@ -23,6 +23,7 @@ export class EntsoeService {
         if (this.securityToken === null) {
             throw new Error('The environment variable ENTSOE_SECURITY_TOKEN is not set.');
         }
+
         this.initHttpInterceptor();
     }
 

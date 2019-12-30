@@ -3,12 +3,14 @@ import { CONTEXT } from '@nestjs/graphql';
 
 @Injectable({ scope: Scope.REQUEST })
 export class AxiosFactory implements HttpModuleOptionsFactory {
+
   constructor(@Inject(CONTEXT) private context) {
   }
 
   createHttpOptions(): Promise<HttpModuleOptions> | HttpModuleOptions {
     const headers = { ...this.context.headers };
     delete headers['content-length'];
+    delete headers['Content-Length'];
     return Promise.resolve({ headers });
   }
 }
