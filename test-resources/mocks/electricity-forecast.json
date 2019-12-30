@@ -1,0 +1,141 @@
+{
+  "params": {
+    "documentType": "A71",
+    "in_Domain": "10Y1001A1001A83F",
+    "processType": "A01",
+    "rangeEnd": "201912242300",
+    "rangeStart": "201912232300",
+    "securityToken": "SECURITY_TOKEN"
+  },
+  "parsed": {
+    "GL_MarketDocument": {
+      "TimeSeries": {
+        "Period": {
+          "Point": [
+            {
+              "position": 1,
+              "quantity": 51757
+            },
+            {
+              "position": 2,
+              "quantity": 50790
+            },
+            {
+              "position": 3,
+              "quantity": 50705
+            },
+            {
+              "position": 4,
+              "quantity": 51397
+            },
+            {
+              "position": 5,
+              "quantity": 52540
+            },
+            {
+              "position": 6,
+              "quantity": 54398
+            },
+            {
+              "position": 7,
+              "quantity": 57502
+            },
+            {
+              "position": 8,
+              "quantity": 62458
+            },
+            {
+              "position": 9,
+              "quantity": 67392
+            },
+            {
+              "position": 10,
+              "quantity": 68823
+            },
+            {
+              "position": 11,
+              "quantity": 69591
+            },
+            {
+              "position": 12,
+              "quantity": 70839
+            },
+            {
+              "position": 13,
+              "quantity": 71054
+            },
+            {
+              "position": 14,
+              "quantity": 70011
+            },
+            {
+              "position": 15,
+              "quantity": 67815
+            },
+            {
+              "position": 16,
+              "quantity": 65192
+            },
+            {
+              "position": 17,
+              "quantity": 67547
+            },
+            {
+              "position": 18,
+              "quantity": 68696
+            },
+            {
+              "position": 19,
+              "quantity": 69758
+            },
+            {
+              "position": 20,
+              "quantity": 69946
+            },
+            {
+              "position": 21,
+              "quantity": 66473
+            },
+            {
+              "position": 22,
+              "quantity": 62606
+            },
+            {
+              "position": 23,
+              "quantity": 59722
+            },
+            {
+              "position": 24,
+              "quantity": 57115
+            }
+          ],
+          "resolution": "PT60M",
+          "timeInterval": {
+            "end": "2019-12-23T23:00Z",
+            "start": "2019-12-22T23:00Z"
+          }
+        },
+        "businessType": "A01",
+        "curveType": "A01",
+        "inBiddingZone_Domain.mRID": "10Y1001A1001A83F",
+        "mRID": 1,
+        "objectAggregation": "A01",
+        "quantity_Measure_Unit.name": "MAW"
+      },
+      "createdDateTime": "2019-12-25T10:45:19Z",
+      "mRID": "3c2e88f9150642dcba69dc3be8e2e373",
+      "process.processType": "A01",
+      "receiver_MarketParticipant.mRID": "10X1001A1001A450",
+      "receiver_MarketParticipant.marketRole.type": "A33",
+      "revisionNumber": 1,
+      "sender_MarketParticipant.mRID": "10X1001A1001A450",
+      "sender_MarketParticipant.marketRole.type": "A32",
+      "time_Period.timeInterval": {
+        "end": "2019-12-23T23:00Z",
+        "start": "2019-12-22T23:00Z"
+      },
+      "type": "A71"
+    }
+  },
+  "data": "<GL_MarketDocument xmlns=\"urn:iec62325.351:tc57wg16:451-6:generationloaddocument:3:0\">\n  <mRID>3c2e88f9150642dcba69dc3be8e2e373</mRID>\n  <revisionNumber>1</revisionNumber>\n  <type>A71</type>\n  <process.processType>A01</process.processType>\n  <sender_MarketParticipant.mRID codingScheme=\"A01\">10X1001A1001A450</sender_MarketParticipant.mRID>\n  <sender_MarketParticipant.marketRole.type>A32</sender_MarketParticipant.marketRole.type>\n  <receiver_MarketParticipant.mRID codingScheme=\"A01\">10X1001A1001A450</receiver_MarketParticipant.mRID>\n  <receiver_MarketParticipant.marketRole.type>A33</receiver_MarketParticipant.marketRole.type>\n  <createdDateTime>2019-12-25T10:45:19Z</createdDateTime>\n  <time_Period.timeInterval>\n    <start>2019-12-22T23:00Z</start>\n    <end>2019-12-23T23:00Z</end>\n  </time_Period.timeInterval>\n  <TimeSeries>\n    <mRID>1</mRID>\n    <businessType>A01</businessType>\n    <objectAggregation>A01</objectAggregation>\n    <inBiddingZone_Domain.mRID codingScheme=\"A01\">10Y1001A1001A83F</inBiddingZone_Domain.mRID>\n    <quantity_Measure_Unit.name>MAW</quantity_Measure_Unit.name>\n    <curveType>A01</curveType>\n    <Period>\n      <timeInterval>\n        <start>2019-12-22T23:00Z</start>\n        <end>2019-12-23T23:00Z</end>\n      </timeInterval>\n      <resolution>PT60M</resolution>\n      <Point>\n        <position>1</position>\n        <quantity>51757</quantity>\n      </Point>\n      <Point>\n        <position>2</position>\n        <quantity>50790</quantity>\n      </Point>\n      <Point>\n        <position>3</position>\n        <quantity>50705</quantity>\n      </Point>\n      <Point>\n        <position>4</position>\n        <quantity>51397</quantity>\n      </Point>\n      <Point>\n        <position>5</position>\n        <quantity>52540</quantity>\n      </Point>\n      <Point>\n        <position>6</position>\n        <quantity>54398</quantity>\n      </Point>\n      <Point>\n        <position>7</position>\n        <quantity>57502</quantity>\n      </Point>\n      <Point>\n        <position>8</position>\n        <quantity>62458</quantity>\n      </Point>\n      <Point>\n        <position>9</position>\n        <quantity>67392</quantity>\n      </Point>\n      <Point>\n        <position>10</position>\n        <quantity>68823</quantity>\n      </Point>\n      <Point>\n        <position>11</position>\n        <quantity>69591</quantity>\n      </Point>\n      <Point>\n        <position>12</position>\n        <quantity>70839</quantity>\n      </Point>\n      <Point>\n        <position>13</position>\n        <quantity>71054</quantity>\n      </Point>\n      <Point>\n        <position>14</position>\n        <quantity>70011</quantity>\n      </Point>\n      <Point>\n        <position>15</position>\n        <quantity>67815</quantity>\n      </Point>\n      <Point>\n        <position>16</position>\n        <quantity>65192</quantity>\n      </Point>\n      <Point>\n        <position>17</position>\n        <quantity>67547</quantity>\n      </Point>\n      <Point>\n        <position>18</position>\n        <quantity>68696</quantity>\n      </Point>\n      <Point>\n        <position>19</position>\n        <quantity>69758</quantity>\n      </Point>\n      <Point>\n        <position>20</position>\n        <quantity>69946</quantity>\n      </Point>\n      <Point>\n        <position>21</position>\n        <quantity>66473</quantity>\n      </Point>\n      <Point>\n        <position>22</position>\n        <quantity>62606</quantity>\n      </Point>\n      <Point>\n        <position>23</position>\n        <quantity>59722</quantity>\n      </Point>\n      <Point>\n        <position>24</position>\n        <quantity>57115</quantity>\n      </Point>\n    </Period>\n  </TimeSeries>\n</GL_MarketDocument>"
+}

@@ -1,0 +1,433 @@
+{
+  "params": {
+    "documentType": "A69",
+    "in_Domain": "10Y1001A1001A83F",
+    "processType": "A01",
+    "psrType": "B16",
+    "rangeEnd": "201912242300",
+    "rangeStart": "201912232300",
+    "securityToken": "SECURITY_TOKEN"
+  },
+  "parsed": {
+    "GL_MarketDocument": {
+      "TimeSeries": {
+        "MktPSRType": {
+          "psrType": "B16"
+        },
+        "Period": {
+          "Point": [
+            {
+              "position": 1,
+              "quantity": 0
+            },
+            {
+              "position": 2,
+              "quantity": 0
+            },
+            {
+              "position": 3,
+              "quantity": 0
+            },
+            {
+              "position": 4,
+              "quantity": 0
+            },
+            {
+              "position": 5,
+              "quantity": 0
+            },
+            {
+              "position": 6,
+              "quantity": 0
+            },
+            {
+              "position": 7,
+              "quantity": 0
+            },
+            {
+              "position": 8,
+              "quantity": 0
+            },
+            {
+              "position": 9,
+              "quantity": 0
+            },
+            {
+              "position": 10,
+              "quantity": 0
+            },
+            {
+              "position": 11,
+              "quantity": 0
+            },
+            {
+              "position": 12,
+              "quantity": 0
+            },
+            {
+              "position": 13,
+              "quantity": 0
+            },
+            {
+              "position": 14,
+              "quantity": 0
+            },
+            {
+              "position": 15,
+              "quantity": 0
+            },
+            {
+              "position": 16,
+              "quantity": 0
+            },
+            {
+              "position": 17,
+              "quantity": 0
+            },
+            {
+              "position": 18,
+              "quantity": 0
+            },
+            {
+              "position": 19,
+              "quantity": 0
+            },
+            {
+              "position": 20,
+              "quantity": 0
+            },
+            {
+              "position": 21,
+              "quantity": 0
+            },
+            {
+              "position": 22,
+              "quantity": 0
+            },
+            {
+              "position": 23,
+              "quantity": 0
+            },
+            {
+              "position": 24,
+              "quantity": 0
+            },
+            {
+              "position": 25,
+              "quantity": 0
+            },
+            {
+              "position": 26,
+              "quantity": 0
+            },
+            {
+              "position": 27,
+              "quantity": 0
+            },
+            {
+              "position": 28,
+              "quantity": 0
+            },
+            {
+              "position": 29,
+              "quantity": 0
+            },
+            {
+              "position": 30,
+              "quantity": 0
+            },
+            {
+              "position": 31,
+              "quantity": 0
+            },
+            {
+              "position": 32,
+              "quantity": 0
+            },
+            {
+              "position": 33,
+              "quantity": 2
+            },
+            {
+              "position": 34,
+              "quantity": 25
+            },
+            {
+              "position": 35,
+              "quantity": 143
+            },
+            {
+              "position": 36,
+              "quantity": 282
+            },
+            {
+              "position": 37,
+              "quantity": 500
+            },
+            {
+              "position": 38,
+              "quantity": 797
+            },
+            {
+              "position": 39,
+              "quantity": 1165
+            },
+            {
+              "position": 40,
+              "quantity": 1572
+            },
+            {
+              "position": 41,
+              "quantity": 1991
+            },
+            {
+              "position": 42,
+              "quantity": 2382
+            },
+            {
+              "position": 43,
+              "quantity": 2754
+            },
+            {
+              "position": 44,
+              "quantity": 3085
+            },
+            {
+              "position": 45,
+              "quantity": 3379
+            },
+            {
+              "position": 46,
+              "quantity": 3636
+            },
+            {
+              "position": 47,
+              "quantity": 3835
+            },
+            {
+              "position": 48,
+              "quantity": 3968
+            },
+            {
+              "position": 49,
+              "quantity": 4037
+            },
+            {
+              "position": 50,
+              "quantity": 4055
+            },
+            {
+              "position": 51,
+              "quantity": 4028
+            },
+            {
+              "position": 52,
+              "quantity": 3958
+            },
+            {
+              "position": 53,
+              "quantity": 3842
+            },
+            {
+              "position": 54,
+              "quantity": 3728
+            },
+            {
+              "position": 55,
+              "quantity": 3528
+            },
+            {
+              "position": 56,
+              "quantity": 3281
+            },
+            {
+              "position": 57,
+              "quantity": 2980
+            },
+            {
+              "position": 58,
+              "quantity": 2642
+            },
+            {
+              "position": 59,
+              "quantity": 2235
+            },
+            {
+              "position": 60,
+              "quantity": 1826
+            },
+            {
+              "position": 61,
+              "quantity": 1433
+            },
+            {
+              "position": 62,
+              "quantity": 1041
+            },
+            {
+              "position": 63,
+              "quantity": 681
+            },
+            {
+              "position": 64,
+              "quantity": 385
+            },
+            {
+              "position": 65,
+              "quantity": 161
+            },
+            {
+              "position": 66,
+              "quantity": 12
+            },
+            {
+              "position": 67,
+              "quantity": 0
+            },
+            {
+              "position": 68,
+              "quantity": 0
+            },
+            {
+              "position": 69,
+              "quantity": 0
+            },
+            {
+              "position": 70,
+              "quantity": 0
+            },
+            {
+              "position": 71,
+              "quantity": 0
+            },
+            {
+              "position": 72,
+              "quantity": 0
+            },
+            {
+              "position": 73,
+              "quantity": 0
+            },
+            {
+              "position": 74,
+              "quantity": 0
+            },
+            {
+              "position": 75,
+              "quantity": 0
+            },
+            {
+              "position": 76,
+              "quantity": 0
+            },
+            {
+              "position": 77,
+              "quantity": 0
+            },
+            {
+              "position": 78,
+              "quantity": 0
+            },
+            {
+              "position": 79,
+              "quantity": 0
+            },
+            {
+              "position": 80,
+              "quantity": 0
+            },
+            {
+              "position": 81,
+              "quantity": 0
+            },
+            {
+              "position": 82,
+              "quantity": 0
+            },
+            {
+              "position": 83,
+              "quantity": 0
+            },
+            {
+              "position": 84,
+              "quantity": 0
+            },
+            {
+              "position": 85,
+              "quantity": 0
+            },
+            {
+              "position": 86,
+              "quantity": 0
+            },
+            {
+              "position": 87,
+              "quantity": 0
+            },
+            {
+              "position": 88,
+              "quantity": 0
+            },
+            {
+              "position": 89,
+              "quantity": 0
+            },
+            {
+              "position": 90,
+              "quantity": 0
+            },
+            {
+              "position": 91,
+              "quantity": 0
+            },
+            {
+              "position": 92,
+              "quantity": 0
+            },
+            {
+              "position": 93,
+              "quantity": 0
+            },
+            {
+              "position": 94,
+              "quantity": 0
+            },
+            {
+              "position": 95,
+              "quantity": 0
+            },
+            {
+              "position": 96,
+              "quantity": 0
+            }
+          ],
+          "resolution": "PT15M",
+          "timeInterval": {
+            "end": "2019-12-27T23:00Z",
+            "start": "2019-12-26T23:00Z"
+          }
+        },
+        "businessType": "A94",
+        "curveType": "A01",
+        "inBiddingZone_Domain.mRID": "10Y1001A1001A83F",
+        "mRID": 1,
+        "objectAggregation": "A08",
+        "quantity_Measure_Unit.name": "MAW"
+      },
+      "createdDateTime": "2019-12-27T16:01:49Z",
+      "mRID": "a8fd79ae83424e17a625d2d6571f5f20",
+      "process.processType": "A01",
+      "receiver_MarketParticipant.mRID": "10X1001A1001A450",
+      "receiver_MarketParticipant.marketRole.type": "A33",
+      "revisionNumber": 1,
+      "sender_MarketParticipant.mRID": "10X1001A1001A450",
+      "sender_MarketParticipant.marketRole.type": "A32",
+      "time_Period.timeInterval": {
+        "end": "2019-12-27T23:00Z",
+        "start": "2019-12-26T23:00Z"
+      },
+      "type": "A69"
+    }
+  },
+  "data": "<GL_MarketDocument xmlns=\"urn:iec62325.351:tc57wg16:451-6:generationloaddocument:3:0\">\n  <mRID>a8fd79ae83424e17a625d2d6571f5f20</mRID>\n  <revisionNumber>1</revisionNumber>\n  <type>A69</type>\n  <process.processType>A01</process.processType>\n  <sender_MarketParticipant.mRID codingScheme=\"A01\">10X1001A1001A450</sender_MarketParticipant.mRID>\n  <sender_MarketParticipant.marketRole.type>A32</sender_MarketParticipant.marketRole.type>\n  <receiver_MarketParticipant.mRID codingScheme=\"A01\">10X1001A1001A450</receiver_MarketParticipant.mRID>\n  <receiver_MarketParticipant.marketRole.type>A33</receiver_MarketParticipant.marketRole.type>\n  <createdDateTime>2019-12-27T16:01:49Z</createdDateTime>\n  <time_Period.timeInterval>\n    <start>2019-12-26T23:00Z</start>\n    <end>2019-12-27T23:00Z</end>\n  </time_Period.timeInterval>\n  <TimeSeries>\n    <mRID>1</mRID>\n    <businessType>A94</businessType>\n    <objectAggregation>A08</objectAggregation>\n    <inBiddingZone_Domain.mRID codingScheme=\"A01\">10Y1001A1001A83F</inBiddingZone_Domain.mRID>\n    <quantity_Measure_Unit.name>MAW</quantity_Measure_Unit.name>\n    <curveType>A01</curveType>\n    <MktPSRType>\n      <psrType>B16</psrType>\n    </MktPSRType>\n    <Period>\n      <timeInterval>\n        <start>2019-12-26T23:00Z</start>\n        <end>2019-12-27T23:00Z</end>\n      </timeInterval>\n      <resolution>PT15M</resolution>\n      <Point>\n        <position>1</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>2</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>3</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>4</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>5</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>6</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>7</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>8</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>9</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>10</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>11</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>12</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>13</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>14</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>15</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>16</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>17</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>18</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>19</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>20</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>21</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>22</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>23</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>24</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>25</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>26</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>27</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>28</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>29</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>30</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>31</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>32</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>33</position>\n        <quantity>2</quantity>\n      </Point>\n      <Point>\n        <position>34</position>\n        <quantity>25</quantity>\n      </Point>\n      <Point>\n        <position>35</position>\n        <quantity>143</quantity>\n      </Point>\n      <Point>\n        <position>36</position>\n        <quantity>282</quantity>\n      </Point>\n      <Point>\n        <position>37</position>\n        <quantity>500</quantity>\n      </Point>\n      <Point>\n        <position>38</position>\n        <quantity>797</quantity>\n      </Point>\n      <Point>\n        <position>39</position>\n        <quantity>1165</quantity>\n      </Point>\n      <Point>\n        <position>40</position>\n        <quantity>1572</quantity>\n      </Point>\n      <Point>\n        <position>41</position>\n        <quantity>1991</quantity>\n      </Point>\n      <Point>\n        <position>42</position>\n        <quantity>2382</quantity>\n      </Point>\n      <Point>\n        <position>43</position>\n        <quantity>2754</quantity>\n      </Point>\n      <Point>\n        <position>44</position>\n        <quantity>3085</quantity>\n      </Point>\n      <Point>\n        <position>45</position>\n        <quantity>3379</quantity>\n      </Point>\n      <Point>\n        <position>46</position>\n        <quantity>3636</quantity>\n      </Point>\n      <Point>\n        <position>47</position>\n        <quantity>3835</quantity>\n      </Point>\n      <Point>\n        <position>48</position>\n        <quantity>3968</quantity>\n      </Point>\n      <Point>\n        <position>49</position>\n        <quantity>4037</quantity>\n      </Point>\n      <Point>\n        <position>50</position>\n        <quantity>4055</quantity>\n      </Point>\n      <Point>\n        <position>51</position>\n        <quantity>4028</quantity>\n      </Point>\n      <Point>\n        <position>52</position>\n        <quantity>3958</quantity>\n      </Point>\n      <Point>\n        <position>53</position>\n        <quantity>3842</quantity>\n      </Point>\n      <Point>\n        <position>54</position>\n        <quantity>3728</quantity>\n      </Point>\n      <Point>\n        <position>55</position>\n        <quantity>3528</quantity>\n      </Point>\n      <Point>\n        <position>56</position>\n        <quantity>3281</quantity>\n      </Point>\n      <Point>\n        <position>57</position>\n        <quantity>2980</quantity>\n      </Point>\n      <Point>\n        <position>58</position>\n        <quantity>2642</quantity>\n      </Point>\n      <Point>\n        <position>59</position>\n        <quantity>2235</quantity>\n      </Point>\n      <Point>\n        <position>60</position>\n        <quantity>1826</quantity>\n      </Point>\n      <Point>\n        <position>61</position>\n        <quantity>1433</quantity>\n      </Point>\n      <Point>\n        <position>62</position>\n        <quantity>1041</quantity>\n      </Point>\n      <Point>\n        <position>63</position>\n        <quantity>681</quantity>\n      </Point>\n      <Point>\n        <position>64</position>\n        <quantity>385</quantity>\n      </Point>\n      <Point>\n        <position>65</position>\n        <quantity>161</quantity>\n      </Point>\n      <Point>\n        <position>66</position>\n        <quantity>12</quantity>\n      </Point>\n      <Point>\n        <position>67</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>68</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>69</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>70</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>71</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>72</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>73</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>74</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>75</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>76</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>77</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>78</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>79</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>80</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>81</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>82</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>83</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>84</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>85</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>86</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>87</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>88</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>89</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>90</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>91</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>92</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>93</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>94</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>95</position>\n        <quantity>0</quantity>\n      </Point>\n      <Point>\n        <position>96</position>\n        <quantity>0</quantity>\n      </Point>\n    </Period>\n  </TimeSeries>\n</GL_MarketDocument>"
+}
