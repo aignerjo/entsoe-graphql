@@ -31,7 +31,7 @@ export class LoggingService {
         this.logger.debug({
             message: `response from outgoing request to ${request ? request.url : undefined} with status: ${response.status}`,
             headers: LoggingService.sanitizeHeader(response.headers || undefined),
-            body: parse.parse(response.data),
+            body: response.data ? parse.parse(response.data) : undefined,
             status: response.status,
             url: request ? request.url : undefined,
         });

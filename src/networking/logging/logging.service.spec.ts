@@ -74,14 +74,14 @@ describe('LoggingService', () => {
                 because: 'great',
                 why: 'test',
                 invalid: { do: 'ignore this' },
-                Authorization: 'Bearer ey12i94zu1njwdapnjsdips',
-                authorization: 'Bearer 12905781892uz5891',
+                securityToken: 'Bearer ey12i94zu1njwdapnjsdips',
+                SecurityToken: 'Bearer 12905781892uz5891',
             },
             status: HttpStatus.I_AM_A_TEAPOT,
-            data: 'Woop Woop!',
+            data: '<data>Woop Woop!</data>',
         } as any as AxiosResponse);
         expect(logSpy).toHaveBeenCalledWith({
-            body: 'Woop Woop!',
+            body: { data: 'Woop Woop!' },
             headers: { because: 'great', why: 'test' },
             message: 'response from outgoing request to /TEST with status: 418',
             url: '/TEST',
