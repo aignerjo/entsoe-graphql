@@ -1,0 +1,9 @@
+.idea/
+dist/
+node_modules/
+.prettierrc
+tslint.json
+README.md
+LICENCE.md
+reports/
+test-resources/
