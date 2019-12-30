@@ -18,7 +18,7 @@ export class ElectricityMixResolver {
         const position = parent.position;
         const periodStart = parent.periodStart;
         const periodEnd = parent.periodEnd;
-        const solar: EntsoeDtoModel = await this.entseoService.getSolarForeast(periodStart, periodEnd).toPromise();
+        const solar: EntsoeDtoModel = await this.entseoService.getSolarForecast(periodStart, periodEnd).toPromise();
         return solar.GL_MarketDocument.TimeSeries.Period.Point
             .filter(point => (point.position / 4) === position)
             .map(point => point.quantity)[0];

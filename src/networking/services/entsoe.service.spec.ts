@@ -1,29 +1,46 @@
-import { HttpService } from '@nestjs/common';
+import { HttpService, HttpStatus } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { Range } from '../../electricity/pipes/day-to-range.pipe';
+import * as electricityForecastMock from '../../../test-resources/mocks/electricity-forecast.json';
+import { EntsoeDtoModel } from '../models/entsoe-dto.model';
 import { HttpServiceMock } from '../../../test/http-service-mock';
 import { LoggingService } from '../logging/logging.service';
+import * as solarForecastMock from '../../../test-resources/mocks/solar-forecast.json';
+import { tick } from '../../../test/tick';
 
 import { ENTSOE_API_URL, ENTSOE_SECURITY_TOKEN, EntsoeService } from './entsoe.service';
+
+interface MockData {
+    data: string;
+    params: any;
+    parsed: any;
+}
 
 describe('EntsoeService', () => {
     let service: EntsoeService;
     let mockClient: HttpServiceMock;
+    let interceptorMock;
+
+    const securityTokenFixture = 'SECURITY_TOKEN';
+
+    const rangeFixture: Range = { start: '201912232300', end: '201912242300' };
 
     beforeEach(async () => {
         mockClient = new HttpServiceMock();
-        mockClient['axiosRef'] = {
+        interceptorMock = {
             interceptors: {
-                request: { use: () => null },
-                response: { use: () => null }
+                request: { use: (request) => request },
+                response: { use: (request) => request }
             }
         };
+        mockClient['axiosRef'] = interceptorMock;
 
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 { provide: HttpService, useValue: mockClient },
                 { provide: ENTSOE_API_URL, useValue: '' },
-                { provide: ENTSOE_SECURITY_TOKEN, useValue: '' },
+                { provide: ENTSOE_SECURITY_TOKEN, useValue: securityTokenFixture },
                 LoggingService,
                 EntsoeService],
         }).compile();
@@ -55,44 +72,71 @@ describe('EntsoeService', () => {
         expect(service).toBeDefined();
     });
 
-    // it('get cluster', async () => {
-    //     const result = service.getCluster(1);
-    //     await tick();
-    //
-    //     mockClient.flush(200, { id: 1 }, {});
-    //     mockClient.popRequest(req => {
-    //         expect(req.url).toEqual('/1');
-    //         expect(req.params).not.toBeDefined();
-    //         expect(req.headers).not.toBeDefined();
-    //     });
-    //
-    //     await result;
-    // });
-    // it('clusters without args', async () => {
-    //     const result = service.getClusters();
-    //     await tick();
-    //
-    //     mockClient.flush(200, clustersFixture, {});
-    //     mockClient.popRequest(req => {
-    //         expect(req.url).toEqual('');
-    //         expect(req.params).toEqual({});
-    //         expect(req.headers).toEqual({});
-    //     });
-    //
-    //     await result;
-    // });
-    //
-    // it('clusters with args', async () => {
-    //     const result = service.getClusters(1, 50, 'filterFixture', 'sortFixture', 'queryFixture');
-    //     await tick();
-    //
-    //     mockClient.flush(200, clustersFixture, {});
-    //     mockClient.popRequest(req => {
-    //         expect(req.url).toEqual('');
-    //         expect(req.params).toEqual({ filterBy: 'filterFixture', query: 'queryFixture', sortBy: 'sortFixture' });
-    //         expect(req.headers).toEqual({ 'X-Page-Size': 50, 'Range': 'pages 1' });
-    //     });
-    //
-    //     await result;
-    // });
+    it('should get the solar forecast for a given range', async () => {
+        const solarForecastFixture: MockData = solarForecastMock as any;
+        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end).toPromise();
+        await tick();
+
+        mockClient.flush(200, solarForecastFixture.data, {});
+        mockClient.popRequest(req => {
+            expect(req.params).toEqual(solarForecastFixture.params);
+        });
+
+        const data: EntsoeDtoModel = await result;
+        expect(data).toEqual(solarForecastFixture.parsed);
+
+    });
+
+    it('should fail if solar forecast request failed', async () => {
+        const solarForecastFixture: MockData = solarForecastMock as any;
+        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end).toPromise();
+        await tick();
+
+        mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});
+        mockClient.popRequest(req => {
+            expect(req.params).toEqual(solarForecastFixture.params);
+        });
+
+        try {
+            await result;
+            fail();
+        } catch (e) {
+            expect(e).toBeDefined();
+        }
+
+    });
+
+    it('should get the total electricity forecast for a given range', async () => {
+        const electricityForecastFixture: MockData = electricityForecastMock as any;
+        const result = service.getElectricity(rangeFixture.start, rangeFixture.end).toPromise();
+        await tick();
+
+        mockClient.flush(200, electricityForecastFixture.data, {});
+        mockClient.popRequest(req => {
+            expect(req.params).toEqual(electricityForecastFixture.params);
+        });
+
+        const data: EntsoeDtoModel = await result;
+        expect(data).toEqual(electricityForecastFixture.parsed);
+
+    });
+
+    it('should fail if electricity forecast request failed', async () => {
+        const electricityForecastFixture: MockData = electricityForecastMock as any;
+        const result = service.getElectricity(rangeFixture.start, rangeFixture.end).toPromise();
+        await tick();
+
+        mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});
+        mockClient.popRequest(req => {
+            expect(req.params).toEqual(electricityForecastFixture.params);
+        });
+
+        try {
+            await result;
+            fail();
+        } catch (e) {
+            expect(e).toBeDefined();
+        }
+
+    });
 });

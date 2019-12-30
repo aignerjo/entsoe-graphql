@@ -23,19 +23,17 @@ export class EntsoeService {
         if (this.securityToken === null) {
             throw new Error('The environment variable ENTSOE_SECURITY_TOKEN is not set.');
         }
-
-        this.initHttpInterceptor();
     }
 
-    getSolarForeast(periodStart: string, periodEnd: string): Observable<any> {
+    getSolarForecast(rangeStart: string, rangeEnd: string): Observable<any> {
         const params = {
             securityToken: this.securityToken,
             psrType: ParseType.solar,
             processType: ProcessType.dayAhead,
             documentType: DocumentType.windAndSolarForecast,
             in_Domain: Location.germany,
-            periodStart,
-            periodEnd,
+            rangeStart,
+            rangeEnd,
         };
 
         return this.httpClient.get<any>(this.baseUrl, { params }).pipe(
@@ -45,14 +43,14 @@ export class EntsoeService {
             }));
     }
 
-    getElectricity(periodStart: string, periodEnd: string): Observable<any> {
+    getElectricity(rangeStart: string, rangeEnd: string): Observable<any> {
         const params = {
             securityToken: this.securityToken,
             processType: ProcessType.dayAhead,
             documentType: DocumentType.generationForecast,
             in_Domain: Location.germany,
-            periodStart,
-            periodEnd,
+            rangeStart,
+            rangeEnd,
         };
 
         return this.httpClient.get<any>(this.baseUrl, { params }).pipe(
@@ -60,20 +58,5 @@ export class EntsoeService {
             catchError((e) => {
                 return throwError(e);
             }));
-    }
-
-    private initHttpInterceptor() {
-        this.httpClient.axiosRef.interceptors.request.use((request) => {
-            this.logger.logHttpRequest(request, 'outgoing');
-            if (request.method === 'get') {
-                delete request.headers['content-length'];
-            }
-            return request;
-        });
-
-        this.httpClient.axiosRef.interceptors.response.use((response) => {
-            this.logger.logHttpResponse(response);
-            return response;
-        });
     }
 }
