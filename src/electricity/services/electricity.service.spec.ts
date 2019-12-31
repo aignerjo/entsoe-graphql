@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { EntsoeService } from '../../networking/services/entsoe.service';
+import { ParseIntervalPipe } from '../pipes/parse-interval.pipe';
 
 import { ElectricityService } from './electricity.service';
 
@@ -12,6 +13,7 @@ describe('ElectricityService', () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ElectricityService,
+                ParseIntervalPipe,
                 { provide: EntsoeService, useValue: { getSolarForecast: () => null, getElectricity: () => null } },
             ],
         }).compile();
