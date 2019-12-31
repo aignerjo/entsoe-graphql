@@ -1,14 +1,26 @@
 import { HttpService, Inject, Injectable, Optional } from '@nestjs/common';
+import { AxiosRequestConfig } from 'axios';
 import * as parse from 'fast-xml-parser';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { EntsoeDtoModel } from '../models/entsoe-dto.model';
 import { DocumentType, Location, ParseType, ProcessType } from '../constants/entsoe.constants';
+import { HttpMethod } from '../../../test/http-service-mock';
 import { LoggingService } from '../logging/logging.service';
 
 export const ENTSOE_API_URL = 'ENTSOE_API_URL';
 export const ENTSOE_SECURITY_TOKEN = 'ENTSOE_SECURITY_TOKEN';
+
+export interface EntsoeParams {
+    securityToken?: string;
+    documentType?: string;
+    psrType?: string;
+    processType?: string;
+    in_Domain?: string;
+    periodStart?: string;
+    periodEnd?: string;
+}
 
 @Injectable()
 export class EntsoeService {
@@ -23,53 +35,46 @@ export class EntsoeService {
         if (this.securityToken === null) {
             throw new Error('The environment variable ENTSOE_SECURITY_TOKEN is not set.');
         }
-        this.initHttpInterceptor();
     }
 
     getSolarForecast(periodStart: string, periodEnd: string): Observable<any> {
-        const params = {
-            securityToken: this.securityToken,
+        const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
             psrType: ParseType.solar,
             processType: ProcessType.dayAhead,
             documentType: DocumentType.windAndSolarForecast,
             in_Domain: Location.germany,
             periodStart,
             periodEnd,
-        };
+        });
 
-        return this.httpClient.get<any>(this.baseUrl, { params }).pipe(
+        return this.httpClient.request<any>(request).pipe(
+            tap(() => this.logger.logHttpRequest(request, 'outgoing')),
             map(res => parse.parse(res.data) as EntsoeDtoModel),
-            catchError((e) => {
-                return throwError(e);
-            }));
+            tap((res) => this.logger.logHttpResponse(res)));
+
     }
 
     getElectricity(periodStart: string, periodEnd: string): Observable<any> {
-        const params = {
-            securityToken: this.securityToken,
-            processType: ProcessType.dayAhead,
-            documentType: DocumentType.generationForecast,
-            in_Domain: Location.germany,
+        const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
             periodStart,
             periodEnd,
-        };
+            processType: ProcessType.dayAhead,
+            documentType: DocumentType.generationForecast,
+            in_Domain: Location.germany
+        });
 
-        return this.httpClient.get<any>(this.baseUrl, { params }).pipe(
+        return this.httpClient.request<any>(request).pipe(
+            tap(() => this.logger.logHttpRequest(request, 'outgoing')),
             map(res => parse.parse(res.data) as EntsoeDtoModel),
-            catchError((e) => {
-                return throwError(e);
-            }));
+            tap((res) => this.logger.logHttpResponse(res)));
     }
 
-    private initHttpInterceptor() {
-        this.httpClient.axiosRef.interceptors.request.use((request) => {
-            this.logger.logHttpRequest(request, 'outgoing');
-            return request;
-        });
-
-        this.httpClient.axiosRef.interceptors.response.use((response) => {
-            this.logger.logHttpResponse(response);
-            return response;
-        });
+    private generateRequest(method: HttpMethod, entsoeParams: EntsoeParams): AxiosRequestConfig {
+        return Object.assign(
+            {} as AxiosRequestConfig,
+            { baseURL: this.baseUrl, method },
+            {
+                params: Object.assign(entsoeParams, { securityToken: this.securityToken })
+            });
     }
 }
