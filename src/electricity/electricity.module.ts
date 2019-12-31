@@ -7,6 +7,10 @@ import { DateScalar } from './scalar/date.scalar';
 import { DayToRangePipe } from './pipes/day-to-range.pipe';
 import { ElectricityMixResolver } from './resolvers/electricity/electricity-mix.resolver';
 import { ElectricityResolver } from './resolvers/electricity/electricity.resolver';
+import { ElectricityService } from './services/electricity.service';
+import { ParseCountryPipe } from './pipes/parse-country.pipe';
+import { ParseIntervalPipe } from './pipes/parse-interval.pipe';
+import { SolarElectricityService } from './services/solar-electricity.service';
 
 @Module({
     imports: [
@@ -20,10 +24,18 @@ import { ElectricityResolver } from './resolvers/electricity/electricity.resolve
     ],
     providers: [
         ElectricityResolver,
+        SolarElectricityService,
+        ElectricityService,
         ElectricityMixResolver,
         DateScalar,
         DayToRangePipe,
+        ParseIntervalPipe,
+        ParseCountryPipe
     ],
+    exports: [
+        ElectricityService,
+        SolarElectricityService,
+    ]
 })
 
 export class ElectricityModule {

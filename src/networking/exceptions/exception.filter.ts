@@ -16,8 +16,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
             return toApolloError(exception, status);
         }
 
-        if (exception.code === Exception.INVALID_DAY) {
-            return new HttpException('Invalid day requested', HttpStatus.BAD_REQUEST);
+        switch (exception.code) {
+            case Exception.INVALID_DAY:
+                return new HttpException('Invalid day requested', HttpStatus.BAD_REQUEST);
+            case Exception.INVALID_TIME_INTERVAL:
+                return new HttpException('Invalid time interval received', HttpStatus.BAD_REQUEST);
+            case Exception.INVALID_COUNTRY_PROVIDED:
+                return new HttpException('Not yet implemented', HttpStatus.NOT_IMPLEMENTED);
         }
 
         return exception;

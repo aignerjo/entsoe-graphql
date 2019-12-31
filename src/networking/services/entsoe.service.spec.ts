@@ -19,12 +19,14 @@ interface MockData {
 
 describe('EntsoeService', () => {
     let service: EntsoeService;
+    let loggingService: LoggingService;
     let mockClient: HttpServiceMock;
     let interceptorMock;
 
     const securityTokenFixture = 'SECURITY_TOKEN';
 
     const rangeFixture: Range = { start: '201912232300', end: '201912242300' };
+    const countryFixture = '10Y1001A1001A83F';
 
     beforeEach(async () => {
         mockClient = new HttpServiceMock();
@@ -46,6 +48,7 @@ describe('EntsoeService', () => {
         }).compile();
 
         service = module.get<EntsoeService>(EntsoeService);
+        loggingService = module.get<LoggingService>(LoggingService);
     });
 
     it('checks base url on initialization', () => {
@@ -74,7 +77,11 @@ describe('EntsoeService', () => {
 
     it('should get the solar forecast for a given range', async () => {
         const solarForecastFixture: MockData = solarForecastMock as any;
-        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end).toPromise();
+
+        const incoming = spyOn(loggingService, 'logHttpResponse');
+        const outgoing = spyOn(loggingService, 'logHttpRequest');
+
+        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(200, solarForecastFixture.data, {});
@@ -85,11 +92,14 @@ describe('EntsoeService', () => {
         const data: EntsoeDtoModel = await result;
         expect(data).toEqual(solarForecastFixture.parsed);
 
+        expect(incoming).toHaveBeenCalled();
+        expect(outgoing).toHaveBeenCalled();
+
     });
 
     it('should fail if solar forecast request failed', async () => {
         const solarForecastFixture: MockData = solarForecastMock as any;
-        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end).toPromise();
+        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});
@@ -103,12 +113,14 @@ describe('EntsoeService', () => {
         } catch (e) {
             expect(e).toBeDefined();
         }
-
     });
 
     it('should get the total electricity forecast for a given range', async () => {
+        const incoming = spyOn(loggingService, 'logHttpResponse');
+        const outgoing = spyOn(loggingService, 'logHttpRequest');
+
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity(rangeFixture.start, rangeFixture.end).toPromise();
+        const result = service.getElectricity(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(200, electricityForecastFixture.data, {});
@@ -119,11 +131,14 @@ describe('EntsoeService', () => {
         const data: EntsoeDtoModel = await result;
         expect(data).toEqual(electricityForecastFixture.parsed);
 
+        expect(incoming).toHaveBeenCalled();
+        expect(outgoing).toHaveBeenCalled();
+
     });
 
     it('should fail if electricity forecast request failed', async () => {
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity(rangeFixture.start, rangeFixture.end).toPromise();
+        const result = service.getElectricity(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});

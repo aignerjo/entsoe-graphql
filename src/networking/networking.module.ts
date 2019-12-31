@@ -1,4 +1,4 @@
-import { HttpModule, HttpService, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { HttpModule, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import { AxiosFactory } from './factories/axios.factory';
 import { ENTSOE_API_URL, ENTSOE_SECURITY_TOKEN, EntsoeService } from './services/entsoe.service';
@@ -13,7 +13,6 @@ import { LoggingService } from './logging/logging.service';
     ],
     providers: [
         LoggingService,
-        HttpService,
         EntsoeService,
         { provide: ENTSOE_API_URL, useValue: process.env[ENTSOE_API_URL] },
         { provide: ENTSOE_SECURITY_TOKEN, useValue: process.env[ENTSOE_SECURITY_TOKEN] },
@@ -25,28 +24,9 @@ import { LoggingService } from './logging/logging.service';
 
 export class NetworkingModule implements NestModule {
 
-    constructor(private httpClient: HttpService, private logger: LoggingService) {
-        this.initHttpInterceptor();
-    }
-
     configure(consumer: MiddlewareConsumer) {
         consumer
             .apply(LoggingMiddleware)
             .forRoutes('*');
-    }
-
-    private initHttpInterceptor() {
-        this.httpClient.axiosRef.interceptors.request.use((request) => {
-            this.logger.logHttpRequest(request, 'outgoing');
-            if (request.method === 'get') {
-                delete request.headers['content-length'];
-            }
-            return request;
-        });
-
-        this.httpClient.axiosRef.interceptors.response.use((response) => {
-            this.logger.logHttpResponse(response);
-            return response;
-        });
     }
 }

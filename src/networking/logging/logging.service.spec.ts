@@ -41,7 +41,6 @@ describe('LoggingService', () => {
             data: 'Woop Woop!',
         } as any as AxiosRequestConfig, 'test');
         expect(logSpy).toHaveBeenCalledWith({
-                body: 'Woop Woop!',
                 headers: { because: 'great', why: 'test' },
                 message: 'test request: get /TEST',
                 method: 'get',

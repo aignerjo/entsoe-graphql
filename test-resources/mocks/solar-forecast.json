@@ -4,8 +4,8 @@
     "in_Domain": "10Y1001A1001A83F",
     "processType": "A01",
     "psrType": "B16",
-    "rangeEnd": "201912242300",
-    "rangeStart": "201912232300",
+    "periodEnd": "201912242300",
+    "periodStart": "201912232300",
     "securityToken": "SECURITY_TOKEN"
   },
   "parsed": {

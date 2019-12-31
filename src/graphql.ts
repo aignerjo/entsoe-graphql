@@ -8,7 +8,6 @@
 export interface Electricity {
     amount?: number;
     timestamp?: Date;
-    country?: string;
     mix?: ElectricityMix;
 }
 
@@ -18,5 +17,5 @@ export interface ElectricityMix {
 }
 
 export interface IQuery {
-    electricity(day?: Date): Electricity[] | Promise<Electricity[]>;
+    electricity(day?: Date, country?: string): Electricity[] | Promise<Electricity[]>;
 }
