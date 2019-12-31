@@ -8,11 +8,13 @@ describe('ElectricityMixResolver', () => {
     let resolver: ElectricityMixResolver;
     let solarElectrcityService: SolarElectricityService;
 
+    const countryFixture = '10Y1001A1001A83F';
+
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ElectricityMixResolver,
-                { provide: SolarElectricityService, useValue: { getSolarElectrcity: () => null } },
+                { provide: SolarElectricityService, useValue: { getSolarElectricity: () => null } },
             ],
         }).compile();
 
@@ -25,11 +27,12 @@ describe('ElectricityMixResolver', () => {
     });
 
     it('should resolve solar electricity', async () => {
-        const spy = spyOn(solarElectrcityService, 'getSolarElectrcity');
+        const spy = spyOn(solarElectrcityService, 'getSolarElectricity');
         const parent: ElectricityParent = {
             position: 1,
             periodStart: '201912232300',
-            periodEnd: '201912242300'
+            periodEnd: '201912242300',
+            countryCode: countryFixture
         };
         await resolver.getSolarAmount(parent);
         expect(spy).toHaveBeenCalledWith(parent);
@@ -39,7 +42,8 @@ describe('ElectricityMixResolver', () => {
         const parent: ElectricityParent = {
             position: 1,
             periodStart: '201912232300',
-            periodEnd: '201912242300'
+            periodEnd: '201912242300',
+            countryCode: countryFixture
         };
         const wind = await resolver.getWindAmount(parent);
         expect(wind).toEqual(11);

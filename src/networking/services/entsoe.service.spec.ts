@@ -26,6 +26,7 @@ describe('EntsoeService', () => {
     const securityTokenFixture = 'SECURITY_TOKEN';
 
     const rangeFixture: Range = { start: '201912232300', end: '201912242300' };
+    const countryFixture = '10Y1001A1001A83F';
 
     beforeEach(async () => {
         mockClient = new HttpServiceMock();
@@ -80,7 +81,7 @@ describe('EntsoeService', () => {
         const incoming = spyOn(loggingService, 'logHttpResponse');
         const outgoing = spyOn(loggingService, 'logHttpRequest');
 
-        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end).toPromise();
+        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(200, solarForecastFixture.data, {});
@@ -98,7 +99,7 @@ describe('EntsoeService', () => {
 
     it('should fail if solar forecast request failed', async () => {
         const solarForecastFixture: MockData = solarForecastMock as any;
-        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end).toPromise();
+        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});
@@ -119,7 +120,7 @@ describe('EntsoeService', () => {
         const outgoing = spyOn(loggingService, 'logHttpRequest');
 
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity(rangeFixture.start, rangeFixture.end).toPromise();
+        const result = service.getElectricity(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(200, electricityForecastFixture.data, {});
@@ -137,7 +138,7 @@ describe('EntsoeService', () => {
 
     it('should fail if electricity forecast request failed', async () => {
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity(rangeFixture.start, rangeFixture.end).toPromise();
+        const result = service.getElectricity(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});

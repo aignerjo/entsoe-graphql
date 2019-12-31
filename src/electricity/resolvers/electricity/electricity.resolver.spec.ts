@@ -9,6 +9,8 @@ describe('ElectricityResolver', () => {
     let resolver: ElectricityResolver;
     let service: ElectricityService;
 
+    const countryFixture = 'DE';
+
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
@@ -31,7 +33,7 @@ describe('ElectricityResolver', () => {
             start: '201912232300',
             end: '201912242300'
         };
-        await resolver.getElectricity(period);
-        expect(spy).toHaveBeenCalledWith(period);
+        await resolver.getElectricity(period, countryFixture);
+        expect(spy).toHaveBeenCalledWith(period, countryFixture);
     });
 });

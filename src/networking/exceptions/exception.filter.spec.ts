@@ -43,4 +43,23 @@ describe('HttpExceptionFilter', () => {
         expect(result.message).toEqual('Invalid day requested');
         expect(result.status).toEqual(HttpStatus.BAD_REQUEST);
     });
+
+    it('should throw invalid time interval exception if  error', () => {
+        const sut = new HttpExceptionFilter();
+        const error = new Exception({ message: 'Invalid time interval', code: Exception.INVALID_TIME_INTERVAL });
+
+        const result = sut.catch(error as any, {} as any);
+        expect(result.message).toEqual('Invalid time interval received');
+        expect(result.status).toEqual(HttpStatus.BAD_REQUEST);
+    });
+
+    it('should throw invalid country requested exception if  error', () => {
+        const sut = new HttpExceptionFilter();
+        const error = new Exception({ message: 'Invalid country requested', code: Exception.INVALID_COUNTRY_PROVIDED });
+
+        const result = sut.catch(error as any, {} as any);
+        expect(result.message).toEqual('Not yet implemented');
+        expect(result.status).toEqual(HttpStatus.NOT_IMPLEMENTED);
+    });
+
 });

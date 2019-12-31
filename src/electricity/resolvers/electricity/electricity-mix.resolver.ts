@@ -9,6 +9,7 @@ export interface ElectricityParent {
     position: number;
     periodStart: string;
     periodEnd: string;
+    countryCode: string;
 }
 
 @Resolver('ElectricityMix')
@@ -20,7 +21,7 @@ export class ElectricityMixResolver {
     @ResolveProperty('solar')
     @UseFilters(HttpExceptionFilter)
     async getSolarAmount(@Parent() parent: ElectricityParent): Promise<number> {
-        return this.solarElectrcityService.getSolarElectrcity(parent);
+        return this.solarElectrcityService.getSolarElectricity(parent);
     }
 
     @ResolveProperty('wind')

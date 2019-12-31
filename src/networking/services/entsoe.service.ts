@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { EntsoeDtoModel } from '../models/entsoe-dto.model';
-import { DocumentType, Location, ParseType, ProcessType } from '../constants/entsoe.constants';
+import { DocumentType, ParseType, ProcessType } from '../constants/entsoe.constants';
 import { HttpMethod } from '../../../test/http-service-mock';
 import { LoggingService } from '../logging/logging.service';
 
@@ -37,12 +37,12 @@ export class EntsoeService {
         }
     }
 
-    getSolarForecast(periodStart: string, periodEnd: string): Observable<any> {
+    getSolarForecast(periodStart: string, periodEnd: string, countryCode: string): Observable<any> {
         const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
             psrType: ParseType.solar,
             processType: ProcessType.dayAhead,
             documentType: DocumentType.windAndSolarForecast,
-            in_Domain: Location.germany,
+            in_Domain: countryCode,
             periodStart,
             periodEnd,
         });
@@ -54,13 +54,13 @@ export class EntsoeService {
 
     }
 
-    getElectricity(periodStart: string, periodEnd: string): Observable<any> {
+    getElectricity(periodStart: string, periodEnd: string, countryCode: string): Observable<any> {
         const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
             periodStart,
             periodEnd,
             processType: ProcessType.dayAhead,
             documentType: DocumentType.generationForecast,
-            in_Domain: Location.germany
+            in_Domain: countryCode
         });
 
         return this.httpClient.request<any>(request).pipe(

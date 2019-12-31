@@ -13,8 +13,8 @@ export class ElectricityService {
     constructor(private entsoeService: EntsoeService, private parseInterval: ParseIntervalPipe) {
     }
 
-    async getElectricity({ start, end }: Range): Promise<Electricity[]> {
-        const electricity: EntsoeDtoModel = await this.entsoeService.getElectricity(start, end).toPromise();
+    async getElectricity({ start, end }: Range, countryCode: string): Promise<Electricity[]> {
+        const electricity: EntsoeDtoModel = await this.entsoeService.getElectricity(start, end, countryCode).toPromise();
 
         const interval = this.parseInterval.transform(electricity.GL_MarketDocument.TimeSeries.Period.resolution);
         const intervalStart = electricity.GL_MarketDocument.TimeSeries.Period.timeInterval.start;
@@ -23,9 +23,9 @@ export class ElectricityService {
             const timestamp = moment(intervalStart).add(interval * index, 'minutes').toDate();
             return Object.assign({}, {
                 timestamp,
-                country: 'DE', // TODO: get from electricity response
                 amount: point.quantity,
                 mix: {
+                    countryCode,
                     periodStart: start,
                     periodEnd: end,
                     position: point.position,

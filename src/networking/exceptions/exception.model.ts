@@ -1,8 +1,8 @@
-
 export class Exception extends Error {
 
     public static INVALID_DAY = '9000';
     public static INVALID_TIME_INTERVAL = '9001';
+    public static INVALID_COUNTRY_PROVIDED = '9002';
 
     // tslint:disable-next-line:variable-name
     private _code: number;

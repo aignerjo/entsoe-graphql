@@ -8,6 +8,7 @@ import { DayToRangePipe } from './pipes/day-to-range.pipe';
 import { ElectricityMixResolver } from './resolvers/electricity/electricity-mix.resolver';
 import { ElectricityResolver } from './resolvers/electricity/electricity.resolver';
 import { ElectricityService } from './services/electricity.service';
+import { ParseCountryPipe } from './pipes/parse-country.pipe';
 import { ParseIntervalPipe } from './pipes/parse-interval.pipe';
 import { SolarElectricityService } from './services/solar-electricity.service';
 
@@ -29,6 +30,7 @@ import { SolarElectricityService } from './services/solar-electricity.service';
         DateScalar,
         DayToRangePipe,
         ParseIntervalPipe,
+        ParseCountryPipe
     ],
     exports: [
         ElectricityService,
