@@ -2,8 +2,14 @@ import { UseFilters } from '@nestjs/common';
 import { Parent, ResolveProperty, Resolver } from '@nestjs/graphql';
 
 import { HttpExceptionFilter } from '../../../networking/exceptions/exception.filter';
-import { Electricity, ElectricityMix } from '../../../graphql';
+import { ElectricityMix } from '../../../graphql';
 import { SolarElectricityService } from '../../services/solar-electricity.service';
+
+export interface ElectricityParent {
+    position: number;
+    periodStart: string;
+    periodEnd: string;
+}
 
 @Resolver('ElectricityMix')
 export class ElectricityMixResolver {
@@ -13,13 +19,13 @@ export class ElectricityMixResolver {
 
     @ResolveProperty('solar')
     @UseFilters(HttpExceptionFilter)
-    async getSolarAmount(@Parent() parent: any): Promise<number> {
+    async getSolarAmount(@Parent() parent: ElectricityParent): Promise<number> {
         return this.solarElectrcityService.getSolarElectrcity(parent);
     }
 
     @ResolveProperty('wind')
     @UseFilters(HttpExceptionFilter)
-    async getWindAmount(@Parent() parent: Electricity): Promise<number> {
+    async getWindAmount(@Parent() parent: ElectricityParent): Promise<number> {
         return Promise.resolve(11);
     }
 }
