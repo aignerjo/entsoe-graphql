@@ -1,0 +1,4 @@
+type ElectricityType {
+    amount: Int
+    percentage: Float
+}

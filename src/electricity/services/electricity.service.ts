@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as moment from 'moment';
 
-import { Range } from '../pipes/day-to-range.pipe';
 import { EntsoeDtoModel } from '../../networking/models/entsoe-dto.model';
-import { EntsoeService } from '../../networking/services/entsoe.service';
+import { EntsoeService, Params } from '../../networking/services/entsoe.service';
 import { Electricity } from '../../graphql';
 import { ParseIntervalPipe } from '../pipes/parse-interval.pipe';
 
@@ -13,8 +12,8 @@ export class ElectricityService {
     constructor(private entsoeService: EntsoeService, private parseInterval: ParseIntervalPipe) {
     }
 
-    async getElectricity({ start, end }: Range, countryCode: string): Promise<Electricity[]> {
-        const electricity: EntsoeDtoModel = await this.entsoeService.getElectricity(start, end, countryCode).toPromise();
+    async getElectricity(params: Params): Promise<Electricity[]> {
+        const electricity: EntsoeDtoModel = await this.entsoeService.getElectricity(params).toPromise();
 
         const interval = this.parseInterval.transform(electricity.GL_MarketDocument.TimeSeries.Period.resolution);
         const intervalStart = electricity.GL_MarketDocument.TimeSeries.Period.timeInterval.start;
@@ -24,12 +23,7 @@ export class ElectricityService {
             return Object.assign({}, {
                 timestamp,
                 amount: point.quantity,
-                mix: {
-                    countryCode,
-                    periodStart: start,
-                    periodEnd: end,
-                    position: point.position,
-                },
+                id: point.position,
             }) as Electricity;
         });
     }

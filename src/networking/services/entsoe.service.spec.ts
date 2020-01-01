@@ -81,7 +81,7 @@ describe('EntsoeService', () => {
         const incoming = spyOn(loggingService, 'logHttpResponse');
         const outgoing = spyOn(loggingService, 'logHttpRequest');
 
-        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
+        const result = service.getSolarForecast({ period: rangeFixture, countryCode: countryFixture }).toPromise();
         await tick();
 
         mockClient.flush(200, solarForecastFixture.data, {});
@@ -99,7 +99,7 @@ describe('EntsoeService', () => {
 
     it('should fail if solar forecast request failed', async () => {
         const solarForecastFixture: MockData = solarForecastMock as any;
-        const result = service.getSolarForecast(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
+        const result = service.getSolarForecast({ period: rangeFixture, countryCode: countryFixture }).toPromise();
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});
@@ -120,7 +120,7 @@ describe('EntsoeService', () => {
         const outgoing = spyOn(loggingService, 'logHttpRequest');
 
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
+        const result = service.getElectricity({ period: rangeFixture, countryCode: countryFixture }).toPromise();
         await tick();
 
         mockClient.flush(200, electricityForecastFixture.data, {});
@@ -138,7 +138,7 @@ describe('EntsoeService', () => {
 
     it('should fail if electricity forecast request failed', async () => {
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity(rangeFixture.start, rangeFixture.end, countryFixture).toPromise();
+        const result = service.getElectricity({ period: rangeFixture, countryCode: countryFixture }).toPromise();
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});

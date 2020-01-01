@@ -1,5 +1,7 @@
 type Electricity {
+    id: Int
     amount: Int
     timestamp: Date
-    mix: ElectricityMix
+    solar: ElectricityType
+    wind: ElectricityType
 }

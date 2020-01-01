@@ -11,7 +11,7 @@ export class LoggingService {
     constructor() {
         this.logger = pino({
             name: 'entsoe-adapter',
-            level: process.env.LOG_LEVEL || 'debug',
+            level: process.env.LOG_LEVEL || 'error',
         });
     }
 
