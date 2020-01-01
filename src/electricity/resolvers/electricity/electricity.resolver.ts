@@ -6,13 +6,13 @@ import { ElectricityService } from '../../services/electricity.service';
 import { HttpExceptionFilter } from '../../../networking/exceptions/exception.filter';
 import { Electricity, ElectricityType } from '../../../graphql';
 import { ParseCountryPipe } from '../../pipes/parse-country.pipe';
-import { SolarElectricityService } from '../../services/solar-electricity.service';
+import { SolarElectricityLoader } from '../../loaders/solar-electricity.loader';
 
 @Resolver('Electricity')
 export class ElectricityResolver {
 
     constructor(private electricityService: ElectricityService,
-                private solarElectricityService: SolarElectricityService) {
+                private solarElectricityLoader: SolarElectricityLoader) {
     }
 
     @Query('electricity')
@@ -27,7 +27,7 @@ export class ElectricityResolver {
     @ResolveProperty('solar')
     @UseFilters(HttpExceptionFilter)
     async getSolarAmount(@Parent() parent: Electricity, @Context() context): Promise<ElectricityType> {
-        return this.solarElectricityService.getSolarElectricity(parent, context.params);
+        return this.solarElectricityLoader.load({ parent, params: context.params });
     }
 
     @ResolveProperty('wind')

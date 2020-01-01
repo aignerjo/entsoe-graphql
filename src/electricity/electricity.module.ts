@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Scope } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { NetworkingModule } from '../networking/networking.module';
@@ -9,6 +9,7 @@ import { ElectricityResolver } from './resolvers/electricity/electricity.resolve
 import { ElectricityService } from './services/electricity.service';
 import { ParseCountryPipe } from './pipes/parse-country.pipe';
 import { ParseIntervalPipe } from './pipes/parse-interval.pipe';
+import { SolarElectricityLoader } from './loaders/solar-electricity.loader';
 import { SolarElectricityService } from './services/solar-electricity.service';
 
 @Module({
@@ -28,10 +29,17 @@ import { SolarElectricityService } from './services/solar-electricity.service';
         DateScalar,
         DayToRangePipe,
         ParseIntervalPipe,
-        ParseCountryPipe
+        ParseCountryPipe,
+        {
+            inject: [SolarElectricityService],
+            provide: SolarElectricityLoader,
+            useFactory: SolarElectricityLoader.create,
+            scope: Scope.REQUEST,
+        }
     ],
     exports: [
         ElectricityService,
+        SolarElectricityLoader,
         SolarElectricityService,
     ]
 })

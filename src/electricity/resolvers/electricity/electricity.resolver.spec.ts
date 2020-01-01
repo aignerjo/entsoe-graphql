@@ -2,14 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { Range } from '../../pipes/day-to-range.pipe';
 import { ElectricityService } from '../../services/electricity.service';
-import { SolarElectricityService } from '../../services/solar-electricity.service';
+import { SolarElectricityLoader } from '../../loaders/solar-electricity.loader';
 
 import { ElectricityResolver } from './electricity.resolver';
 
 describe('ElectricityResolver', () => {
     let resolver: ElectricityResolver;
     let electricityService: ElectricityService;
-    let solarElectricityService: SolarElectricityService;
+    let solarElectricityLoader: SolarElectricityLoader;
 
     const countryFixture = 'DE';
 
@@ -18,13 +18,13 @@ describe('ElectricityResolver', () => {
             providers: [
                 ElectricityResolver,
                 { provide: ElectricityService, useValue: { getElectricity: () => null } },
-                { provide: SolarElectricityService, useValue: { getSolarElectricity: () => null } },
+                { provide: SolarElectricityLoader, useValue: { load: () => null } },
             ],
         }).compile();
 
         resolver = module.get<ElectricityResolver>(ElectricityResolver);
         electricityService = module.get<ElectricityService>(ElectricityService);
-        solarElectricityService = module.get<SolarElectricityService>(SolarElectricityService);
+        solarElectricityLoader = module.get<SolarElectricityLoader>(SolarElectricityLoader);
     });
 
     it('should be defined', () => {
@@ -42,12 +42,12 @@ describe('ElectricityResolver', () => {
     });
 
     it('should resolve solar electricity', async () => {
-        const spy = spyOn(solarElectricityService, 'getSolarElectricity');
+        const spy = spyOn(solarElectricityLoader, 'load');
         const period: Range = {
             start: '201912232300',
             end: '201912242300'
         };
         await resolver.getSolarAmount({ id: 1 }, { params: { period, countryFixture } });
-        expect(spy).toHaveBeenCalledWith({ id: 1 }, { period, countryFixture });
+        expect(spy).toHaveBeenCalledWith({ params: { period, countryFixture }, parent: { id: 1 } });
     });
 });
