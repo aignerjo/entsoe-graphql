@@ -4,6 +4,7 @@ import * as parse from 'fast-xml-parser';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
+import { Range } from '../../electricity/pipes/day-to-range.pipe';
 import { EntsoeDtoModel } from '../models/entsoe-dto.model';
 import { DocumentType, ParseType, ProcessType } from '../constants/entsoe.constants';
 import { HttpMethod } from '../../../test/http-service-mock';
@@ -11,6 +12,11 @@ import { LoggingService } from '../logging/logging.service';
 
 export const ENTSOE_API_URL = 'ENTSOE_API_URL';
 export const ENTSOE_SECURITY_TOKEN = 'ENTSOE_SECURITY_TOKEN';
+
+export interface Params {
+    countryCode: string;
+    period: Range;
+}
 
 export interface EntsoeParams {
     securityToken?: string;
@@ -37,14 +43,14 @@ export class EntsoeService {
         }
     }
 
-    getSolarForecast(periodStart: string, periodEnd: string, countryCode: string): Observable<any> {
+    getSolarForecast({ period, countryCode }: Params): Observable<any> {
         const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
             psrType: ParseType.solar,
             processType: ProcessType.dayAhead,
             documentType: DocumentType.windAndSolarForecast,
             in_Domain: countryCode,
-            periodStart,
-            periodEnd,
+            periodStart: period.start,
+            periodEnd: period.end
         });
 
         return this.httpClient.request<any>(request).pipe(
@@ -54,10 +60,10 @@ export class EntsoeService {
 
     }
 
-    getElectricity(periodStart: string, periodEnd: string, countryCode: string): Observable<any> {
+    getElectricity({ period, countryCode }: Params): Observable<any> {
         const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
-            periodStart,
-            periodEnd,
+            periodStart: period.start,
+            periodEnd: period.end,
             processType: ProcessType.dayAhead,
             documentType: DocumentType.generationForecast,
             in_Domain: countryCode

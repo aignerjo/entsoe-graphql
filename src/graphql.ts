@@ -6,14 +6,16 @@
 
 /* tslint:disable */
 export interface Electricity {
+    id?: number;
     amount?: number;
     timestamp?: Date;
-    mix?: ElectricityMix;
+    solar?: ElectricityType;
+    wind?: ElectricityType;
 }
 
-export interface ElectricityMix {
-    solar?: number;
-    wind?: number;
+export interface ElectricityType {
+    amount?: number;
+    percentage?: number;
 }
 
 export interface IQuery {
