@@ -10,6 +10,8 @@ export enum ProcessType {
 
 export enum ParseType {
     solar = 'B16',
+    windOnshore = 'B19',
+    windOffshore = 'B18'
 }
 
 export enum Location {

@@ -7,12 +7,14 @@ import { HttpExceptionFilter } from '../../../networking/exceptions/exception.fi
 import { Electricity, ElectricityType } from '../../../graphql';
 import { ParseCountryPipe } from '../../pipes/parse-country.pipe';
 import { SolarElectricityLoader } from '../../loaders/solar-electricity.loader';
+import { WindElectricityLoader } from '../../loaders/wind-electricity.loader';
 
 @Resolver('Electricity')
 export class ElectricityResolver {
 
     constructor(private electricityService: ElectricityService,
-                private solarElectricityLoader: SolarElectricityLoader) {
+                private solarElectricityLoader: SolarElectricityLoader,
+                private windElectricityLoader: WindElectricityLoader) {
     }
 
     @Query('electricity')
@@ -32,9 +34,7 @@ export class ElectricityResolver {
 
     @ResolveProperty('wind')
     @UseFilters(HttpExceptionFilter)
-    async getWindAmount(@Parent() parent: Electricity,
-                        @Args('day', DayToRangePipe) period: Range,
-                        @Args('country', ParseCountryPipe) countryCode: string): Promise<number> {
-        return Promise.resolve(11);
+    async getWindAmount(@Parent() parent: Electricity, @Context() context): Promise<ElectricityType> {
+        return this.windElectricityLoader.load({ parent, params: context.params });
     }
 }

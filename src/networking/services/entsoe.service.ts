@@ -60,6 +60,23 @@ export class EntsoeService {
 
     }
 
+    getWindOnshoreForecast({ period, countryCode }: Params): Observable<any> {
+        const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
+            psrType: ParseType.windOnshore,
+            processType: ProcessType.dayAhead,
+            documentType: DocumentType.windAndSolarForecast,
+            in_Domain: countryCode,
+            periodStart: period.start,
+            periodEnd: period.end
+        });
+
+        return this.httpClient.request<any>(request).pipe(
+            tap(() => this.logger.logHttpRequest(request, 'outgoing')),
+            map(res => parse.parse(res.data) as EntsoeDtoModel),
+            tap((res) => this.logger.logHttpResponse(res)));
+
+    }
+
     getElectricity({ period, countryCode }: Params): Observable<any> {
         const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
             periodStart: period.start,
