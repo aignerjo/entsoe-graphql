@@ -25,6 +25,16 @@ export class HttpServiceMock {
         return subject;
     }
 
+    request<T = any>(request: AxiosRequestConfig): Observable<AxiosResponse<T>> {
+        const subject = new Subject<AxiosResponse<T>>();
+        this.pendingRequests.push({ url: request.baseURL, subject });
+        this.expectations.push(Object.assign({}, {
+            url: request.baseURL,
+            method: request.method,
+        } as Request, request));
+        return subject;
+    }
+
     delete<T = any>(url: string, config?: AxiosRequestConfig): Observable<AxiosResponse<T>> {
         const subject = new Subject<AxiosResponse<T>>();
         this.pendingRequests.push({ url, subject });

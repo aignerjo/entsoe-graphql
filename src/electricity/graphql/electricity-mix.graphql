@@ -1,4 +1,0 @@
-type ElectricityMix {
-    solar: Int
-    wind: Int
-}
