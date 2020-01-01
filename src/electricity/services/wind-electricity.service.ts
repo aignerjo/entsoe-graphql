@@ -19,4 +19,14 @@ export class WindElectricityService {
                 percentage: (point.quantity / amount) * 100
             }));
     }
+
+    async getWindOffshoreElectricity({ amount }: Electricity, params: Params): Promise<ElectricityType[]> {
+        const solar: EntsoeDtoModel = await this.entsoeService.getWindOffshoreForecast(params).toPromise();
+        return solar.GL_MarketDocument.TimeSeries.Period.Point
+            .filter(point => (point.position % 4) === 0)
+            .map(point => Object.assign({}, {
+                amount: point.quantity,
+                percentage: (point.quantity / amount) * 100
+            }));
+    }
 }

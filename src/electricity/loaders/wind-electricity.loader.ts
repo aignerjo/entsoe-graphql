@@ -19,7 +19,14 @@ export class WindElectricityLoader implements IDataLoader<Context<Electricity>, 
         const dataLoader = new DataLoader<Context<Electricity>, ElectricityType>(async keys => {
             const parent: Electricity = keys.map(arg => arg.parent)[0];
             const params = keys.map(arg => arg.params)[0];
-            return service.getWindOnshoreElectricity(parent, params);
+            const onshore = await service.getWindOnshoreElectricity(parent, params);
+            const offshore = await service.getWindOffshoreElectricity(parent, params);
+            return onshore.map((entry, index) => {
+                return {
+                    amount: entry.amount + offshore[index].amount,
+                    percentage: entry.percentage + offshore[index].percentage
+                };
+            });
         });
 
         return new WindElectricityLoader(dataLoader);
