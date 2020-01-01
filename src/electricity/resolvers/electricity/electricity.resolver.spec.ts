@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Range } from '../../pipes/day-to-range.pipe';
 import { ElectricityService } from '../../services/electricity.service';
 import { SolarElectricityLoader } from '../../loaders/solar-electricity.loader';
+import { WindElectricityLoader } from '../../loaders/wind-electricity.loader';
 
 import { ElectricityResolver } from './electricity.resolver';
 
@@ -10,6 +11,7 @@ describe('ElectricityResolver', () => {
     let resolver: ElectricityResolver;
     let electricityService: ElectricityService;
     let solarElectricityLoader: SolarElectricityLoader;
+    let windElectricityLoader: WindElectricityLoader;
 
     const countryFixture = 'DE';
 
@@ -19,12 +21,14 @@ describe('ElectricityResolver', () => {
                 ElectricityResolver,
                 { provide: ElectricityService, useValue: { getElectricity: () => null } },
                 { provide: SolarElectricityLoader, useValue: { load: () => null } },
+                { provide: WindElectricityLoader, useValue: { load: () => null } },
             ],
         }).compile();
 
         resolver = module.get<ElectricityResolver>(ElectricityResolver);
         electricityService = module.get<ElectricityService>(ElectricityService);
         solarElectricityLoader = module.get<SolarElectricityLoader>(SolarElectricityLoader);
+        windElectricityLoader = module.get<WindElectricityLoader>(WindElectricityLoader);
     });
 
     it('should be defined', () => {
