@@ -1,4 +1,5 @@
 export enum DocumentType {
+    totalLoad = 'A65',
     windAndSolarForecast = 'A69',
     generationForecast = 'A71',
 }
@@ -12,8 +13,4 @@ export enum ParseType {
     solar = 'B16',
     windOnshore = 'B19',
     windOffshore = 'B18'
-}
-
-export enum Location {
-    germany = '10Y1001A1001A83F',
 }

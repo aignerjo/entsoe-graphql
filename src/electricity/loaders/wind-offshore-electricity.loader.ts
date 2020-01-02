@@ -11,25 +11,18 @@ interface Context<T> {
     parent: T;
 }
 
-export class WindElectricityLoader implements IDataLoader<Context<Electricity>, ElectricityType> {
+export class WindOffshoreElectricityLoader implements IDataLoader<Context<Electricity>, ElectricityType> {
     constructor(private readonly dataLoader: DataLoader<Context<Electricity>, ElectricityType>) {
     }
 
-    public static async create(service: WindElectricityService): Promise<WindElectricityLoader> {
+    public static async create(service: WindElectricityService): Promise<WindOffshoreElectricityLoader> {
         const dataLoader = new DataLoader<Context<Electricity>, ElectricityType>(async keys => {
             const parent: Electricity = keys.map(arg => arg.parent)[0];
             const params = keys.map(arg => arg.params)[0];
-            const onshore = await service.getWindOnshoreElectricity(parent, params);
-            const offshore = await service.getWindOffshoreElectricity(parent, params);
-            return onshore.map((entry, index) => {
-                return {
-                    amount: entry.amount + offshore[index].amount,
-                    percentage: entry.percentage + offshore[index].percentage
-                };
-            });
+            return service.getWindOffshoreElectricity(parent, params);
         });
 
-        return new WindElectricityLoader(dataLoader);
+        return new WindOffshoreElectricityLoader(dataLoader);
     }
 
     public async load(context: Context<Electricity>): Promise<ElectricityType> {

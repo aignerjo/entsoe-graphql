@@ -7,34 +7,42 @@ import { HttpExceptionFilter } from '../../../networking/exceptions/exception.fi
 import { Electricity, ElectricityType } from '../../../graphql';
 import { ParseCountryPipe } from '../../pipes/parse-country.pipe';
 import { SolarElectricityLoader } from '../../loaders/solar-electricity.loader';
-import { WindElectricityLoader } from '../../loaders/wind-electricity.loader';
+import { WindOffshoreElectricityLoader } from '../../loaders/wind-offshore-electricity.loader';
+import { WindOnshoreElectricityLoader } from '../../loaders/wind-onshore-electricity.loader';
 
 @Resolver('Electricity')
 export class ElectricityResolver {
 
     constructor(private electricityService: ElectricityService,
                 private solarElectricityLoader: SolarElectricityLoader,
-                private windElectricityLoader: WindElectricityLoader) {
+                private windOffshoreLoader: WindOffshoreElectricityLoader,
+                private windOnshoreLoader: WindOnshoreElectricityLoader) {
     }
 
-    @Query('electricity')
+    @Query('forecast')
     @UseFilters(HttpExceptionFilter)
-    async getElectricity(@Args('day', DayToRangePipe) period: Range,
-                         @Args('country', ParseCountryPipe) countryCode: string,
-                         @Context() context): Promise<Electricity[]> {
+    async totalForecast(@Args('day', DayToRangePipe) period: Range,
+                        @Args('country', ParseCountryPipe) countryCode: string,
+                        @Context() context): Promise<Electricity[]> {
         context.params = { period, countryCode };
-        return await this.electricityService.getElectricity(context.params);
+        return await this.electricityService.getForecast(context.params);
     }
 
     @ResolveProperty('solar')
     @UseFilters(HttpExceptionFilter)
-    async getSolarAmount(@Parent() parent: Electricity, @Context() context): Promise<ElectricityType> {
+    async solarForecast(@Parent() parent: Electricity, @Context() context): Promise<ElectricityType> {
         return this.solarElectricityLoader.load({ parent, params: context.params });
     }
 
-    @ResolveProperty('wind')
+    @ResolveProperty('windOnshore')
     @UseFilters(HttpExceptionFilter)
-    async getWindAmount(@Parent() parent: Electricity, @Context() context): Promise<ElectricityType> {
-        return this.windElectricityLoader.load({ parent, params: context.params });
+    async windOnshoreForecast(@Parent() parent: Electricity, @Context() context): Promise<ElectricityType> {
+        return this.windOnshoreLoader.load({ parent, params: context.params });
+    }
+
+    @ResolveProperty('windOffshore')
+    @UseFilters(HttpExceptionFilter)
+    async windOffshoreForecast(@Parent() parent: Electricity, @Context() context): Promise<ElectricityType> {
+        return this.windOffshoreLoader.load({ parent, params: context.params });
     }
 }
