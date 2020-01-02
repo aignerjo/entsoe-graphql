@@ -28,7 +28,7 @@ describe('DateScalar', () => {
 
   it('serializes string with timezone', () => {
     const result = scalar.serialize('2019-07-10T12:27:02+0200' as any);
-    expect(result).toEqual('2019-07-10T12:27:02+02:00');
+    expect(result).toEqual('2019-07-10T10:27:02Z');
   });
 
   it('ast string date is parsed', () => {
