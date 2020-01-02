@@ -7,10 +7,10 @@ import { DateScalar } from './scalar/date.scalar';
 import { DayToRangePipe } from './pipes/day-to-range.pipe';
 import { ElectricityResolver } from './resolvers/electricity/electricity.resolver';
 import { ElectricityService } from './services/electricity.service';
+import { SolarElectricityService } from './services/solar-electricity.service';
 import { ParseCountryPipe } from './pipes/parse-country.pipe';
 import { ParseIntervalPipe } from './pipes/parse-interval.pipe';
 import { SolarElectricityLoader } from './loaders/solar-electricity.loader';
-import { SolarElectricityService } from './services/solar-electricity.service';
 import { WindElectricityService } from './services/wind-electricity.service';
 import { WindOffshoreElectricityLoader } from './loaders/wind-offshore-electricity.loader';
 import { WindOnshoreElectricityLoader } from './loaders/wind-onshore-electricity.loader';
@@ -27,6 +27,8 @@ import { WindOnshoreElectricityLoader } from './loaders/wind-onshore-electricity
     ],
     providers: [
         ElectricityResolver,
+        SolarElectricityService,
+        ElectricityService,
         SolarElectricityService,
         WindElectricityService,
         ElectricityService,
