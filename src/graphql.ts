@@ -7,10 +7,11 @@
 /* tslint:disable */
 export interface Electricity {
     id?: number;
-    amount?: number;
+    totalLoad?: number;
     timestamp?: Date;
     solar?: ElectricityType;
-    wind?: ElectricityType;
+    windOffshore?: ElectricityType;
+    windOnshore?: ElectricityType;
 }
 
 export interface ElectricityType {
@@ -19,5 +20,5 @@ export interface ElectricityType {
 }
 
 export interface IQuery {
-    electricity(day?: Date, country?: string): Electricity[] | Promise<Electricity[]>;
+    forecast(day?: Date, country?: string): Electricity[] | Promise<Electricity[]>;
 }

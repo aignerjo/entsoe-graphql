@@ -11,6 +11,9 @@ import { ParseCountryPipe } from './pipes/parse-country.pipe';
 import { ParseIntervalPipe } from './pipes/parse-interval.pipe';
 import { SolarElectricityLoader } from './loaders/solar-electricity.loader';
 import { SolarElectricityService } from './services/solar-electricity.service';
+import { WindElectricityService } from './services/wind-electricity.service';
+import { WindOffshoreElectricityLoader } from './loaders/wind-offshore-electricity.loader';
+import { WindOnshoreElectricityLoader } from './loaders/wind-onshore-electricity.loader';
 
 @Module({
     imports: [
@@ -26,6 +29,9 @@ import { SolarElectricityService } from './services/solar-electricity.service';
         ElectricityResolver,
         SolarElectricityService,
         ElectricityService,
+        SolarElectricityService,
+        WindElectricityService,
+        ElectricityService,
         DateScalar,
         DayToRangePipe,
         ParseIntervalPipe,
@@ -35,14 +41,28 @@ import { SolarElectricityService } from './services/solar-electricity.service';
             provide: SolarElectricityLoader,
             useFactory: SolarElectricityLoader.create,
             scope: Scope.REQUEST,
+        },
+        {
+            inject: [WindElectricityService],
+            provide: WindOnshoreElectricityLoader,
+            useFactory: WindOnshoreElectricityLoader.create,
+            scope: Scope.REQUEST,
+        },
+        {
+            inject: [WindElectricityService],
+            provide: WindOffshoreElectricityLoader,
+            useFactory: WindOffshoreElectricityLoader.create,
+            scope: Scope.REQUEST,
         }
     ],
     exports: [
         ElectricityService,
         SolarElectricityLoader,
         SolarElectricityService,
+        WindOnshoreElectricityLoader,
+        WindOffshoreElectricityLoader,
+        WindElectricityService
     ]
 })
-
 export class ElectricityModule {
 }

@@ -1,7 +1,8 @@
 type Electricity {
     id: Int
-    amount: Int
+    totalLoad: Int
     timestamp: Date
     solar: ElectricityType
-    wind: ElectricityType
+    windOffshore: ElectricityType
+    windOnshore: ElectricityType
 }
