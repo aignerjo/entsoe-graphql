@@ -8,11 +8,11 @@ export class DateScalar implements CustomScalar<string, Moment> {
   description = 'Date custom scalar type';
 
   parseValue(value: string): Moment {
-    return moment.parseZone(value);
+    return moment.utc(value);
   }
 
   serialize(value: Moment): string {
-    const date = moment.parseZone(value);
+    const date = moment.utc(value);
     return date.format();
   }
 

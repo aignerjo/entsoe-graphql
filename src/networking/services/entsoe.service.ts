@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { Range } from '../../electricity/pipes/day-to-range.pipe';
-import { EntsoeDtoModel } from '../models/entsoe-dto.model';
-import { DocumentType, ParseType, ProcessType } from '../constants/entsoe.constants';
 import { HttpMethod } from '../../../test/http-service-mock';
 import { LoggingService } from '../logging/logging.service';
 
@@ -14,8 +12,11 @@ export const ENTSOE_API_URL = 'ENTSOE_API_URL';
 export const ENTSOE_SECURITY_TOKEN = 'ENTSOE_SECURITY_TOKEN';
 
 export interface Params {
-    countryCode: string;
-    period: Range;
+    countryCode?: string;
+    period?: Range;
+    documentType?: string;
+    psrType?: string;
+    processType?: string;
 }
 
 export interface EntsoeParams {
@@ -24,6 +25,7 @@ export interface EntsoeParams {
     psrType?: string;
     processType?: string;
     in_Domain?: string;
+    outbiddingZone_Domain?: string;
     periodStart?: string;
     periodEnd?: string;
 }
@@ -43,36 +45,21 @@ export class EntsoeService {
         }
     }
 
-    getSolarForecast({ period, countryCode }: Params): Observable<any> {
+    get<T>({ documentType, processType, psrType, countryCode, period }: Params): Observable<T> {
         const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
-            psrType: ParseType.solar,
-            processType: ProcessType.dayAhead,
-            documentType: DocumentType.windAndSolarForecast,
+            documentType,
+            processType,
+            psrType,
             in_Domain: countryCode,
+            outbiddingZone_Domain: countryCode,
             periodStart: period.start,
             periodEnd: period.end
         });
 
         return this.httpClient.request<any>(request).pipe(
             tap(() => this.logger.logHttpRequest(request, 'outgoing')),
-            map(res => parse.parse(res.data) as EntsoeDtoModel),
-            tap((res) => this.logger.logHttpResponse(res)));
-
-    }
-
-    getElectricity({ period, countryCode }: Params): Observable<any> {
-        const request: AxiosRequestConfig = this.generateRequest(HttpMethod.GET, {
-            periodStart: period.start,
-            periodEnd: period.end,
-            processType: ProcessType.dayAhead,
-            documentType: DocumentType.generationForecast,
-            in_Domain: countryCode
-        });
-
-        return this.httpClient.request<any>(request).pipe(
-            tap(() => this.logger.logHttpRequest(request, 'outgoing')),
-            map(res => parse.parse(res.data) as EntsoeDtoModel),
-            tap((res) => this.logger.logHttpResponse(res)));
+            tap((res) => this.logger.logHttpResponse(res)),
+            map(res => parse.parse(res.data) as T));
     }
 
     private generateRequest(method: HttpMethod, entsoeParams: EntsoeParams): AxiosRequestConfig {

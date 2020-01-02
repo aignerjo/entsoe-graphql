@@ -2,6 +2,7 @@
   "params": {
     "documentType": "A71",
     "in_Domain": "10Y1001A1001A83F",
+    "outbiddingZone_Domain": "10Y1001A1001A83F",
     "processType": "A01",
     "periodEnd": "201912242300",
     "periodStart": "201912232300",

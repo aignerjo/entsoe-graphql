@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Range } from '../../electricity/pipes/day-to-range.pipe';
 import * as electricityForecastMock from '../../../test-resources/mocks/electricity-forecast.json';
 import { EntsoeDtoModel } from '../models/entsoe-dto.model';
+import { DocumentType, ParseType, ProcessType } from '../constants/entsoe.constants';
 import { HttpServiceMock } from '../../../test/http-service-mock';
 import { LoggingService } from '../logging/logging.service';
 import * as solarForecastMock from '../../../test-resources/mocks/solar-forecast.json';
@@ -81,7 +82,13 @@ describe('EntsoeService', () => {
         const incoming = spyOn(loggingService, 'logHttpResponse');
         const outgoing = spyOn(loggingService, 'logHttpRequest');
 
-        const result = service.getSolarForecast({ period: rangeFixture, countryCode: countryFixture }).toPromise();
+        const result = service.get<EntsoeDtoModel>({
+            period: rangeFixture,
+            countryCode: countryFixture,
+            documentType: DocumentType.windAndSolarForecast,
+            psrType: ParseType.solar,
+            processType: ProcessType.dayAhead
+        }).toPromise();
         await tick();
 
         mockClient.flush(200, solarForecastFixture.data, {});
@@ -99,7 +106,14 @@ describe('EntsoeService', () => {
 
     it('should fail if solar forecast request failed', async () => {
         const solarForecastFixture: MockData = solarForecastMock as any;
-        const result = service.getSolarForecast({ period: rangeFixture, countryCode: countryFixture }).toPromise();
+
+        const result = service.get<EntsoeDtoModel>({
+            period: rangeFixture,
+            countryCode: countryFixture,
+            documentType: DocumentType.windAndSolarForecast,
+            psrType: ParseType.solar,
+            processType: ProcessType.dayAhead
+        }).toPromise();
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});
@@ -120,7 +134,12 @@ describe('EntsoeService', () => {
         const outgoing = spyOn(loggingService, 'logHttpRequest');
 
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity({ period: rangeFixture, countryCode: countryFixture }).toPromise();
+        const result = service.get<EntsoeDtoModel>({
+            documentType: DocumentType.generationForecast,
+            processType: ProcessType.dayAhead,
+            period: rangeFixture,
+            countryCode: countryFixture
+        }).toPromise();
         await tick();
 
         mockClient.flush(200, electricityForecastFixture.data, {});
@@ -138,7 +157,13 @@ describe('EntsoeService', () => {
 
     it('should fail if electricity forecast request failed', async () => {
         const electricityForecastFixture: MockData = electricityForecastMock as any;
-        const result = service.getElectricity({ period: rangeFixture, countryCode: countryFixture }).toPromise();
+        const result = service.get<EntsoeDtoModel>({
+            documentType: DocumentType.generationForecast,
+            processType: ProcessType.dayAhead,
+            period: rangeFixture,
+            countryCode: countryFixture
+        }).toPromise();
+
         await tick();
 
         mockClient.flush(HttpStatus.BAD_REQUEST, '<xml>Error</xml>', {});
