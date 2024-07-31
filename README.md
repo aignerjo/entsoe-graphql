@@ -5,7 +5,7 @@
 ## GraphQL Adapter for Entsoe Transparency API
 <p align="center">Since Entsoe only provides an XML interface, which is difficult to integrate into (web) applications, this repository contains a GraphQL adapter for the Entsoe API.</p>
 
-## Entsoe API
+## Entsoe API (outdated)
 
 The [Entsoe restful API Implementation Guide](https://transparency.entsoe.eu/content/static_content/Static%20content/web%20api/Guide.html) explains the business context and provides the use case and process sequence.
 
